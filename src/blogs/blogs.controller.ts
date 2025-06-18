@@ -1,9 +1,11 @@
-import { Controller, Get, Post, Body, Patch, Param, Delete, ParseIntPipe } from '@nestjs/common';
+import { Controller, Get, Post, Body, Patch, Param, Delete, ParseIntPipe, UseInterceptors } from '@nestjs/common';
 import { BlogsService } from './blogs.service';
 import { CreateBlogDto } from './dto/create-blog.dto';
 import { UpdateBlogDto } from './dto/update-blog.dto';
+import { RemovePasswordInterceptor } from './interceptors/remove-password.interceptor';
 
 @Controller('users/:userId/blogs')
+@UseInterceptors(RemovePasswordInterceptor)
 export class BlogsController {
   constructor(private readonly blogsService: BlogsService) { }
 
